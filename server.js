@@ -6,8 +6,8 @@ const exphbs = require("express-handlebars")
 const app = express()
 const PORT = process.env.PORT || 3001
 
-const sequelize = require("./config/config")
-const SequelizeStore = require("connect-session-sequelize")(session.Store)
+const mongoose = require("./config/config")
+const MongooseStore = require("mongoose-express-session")(session.Store)
 
 const sess = {
   secret: "Super secret secret",
@@ -19,8 +19,8 @@ const sess = {
   },
   resave: false,
   saveUninitialized: true,
-  store: new SequelizeStore({
-    db: sequelize,
+  store: new MongooseStore({
+    connection: mongoose,
   }),
 }
 
@@ -35,7 +35,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, "public")))
 
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}!`)
-  sequelize.sync({ force: false })
+mongoose.connection.once("open", () => {
+  app.listen(PORT, () => {
+    console.log(`API server running on port ${PORT}!`)
+  })
 })

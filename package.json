@@ -18,12 +18,11 @@
   },
   "homepage": "https://github.com/chris-baird/Life-Hacker#readme",
   "dependencies": {
-    "connect-session-sequelize": "^7.1.5",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "express-handlebars": "^6.0.6",
     "express-session": "^1.17.3",
-    "mysql2": "^2.3.3",
-    "sequelize": "^6.23.0"
+    "mongoose": "^6.6.1",
+    "mongoose-express-session": "^0.0.5"
   }
 }
