@@ -1,3 +1,4 @@
+require("dotenv").config()
 const path = require("path")
 const express = require("express")
 const session = require("express-session")
@@ -10,7 +11,7 @@ const mongoose = require("./config/config")
 const MongooseStore = require("mongoose-express-session")(session.Store)
 
 const sess = {
-  secret: "Super secret secret",
+  secret: process.env.secret,
   cookie: {
     maxAge: 300000,
     httpOnly: true,
