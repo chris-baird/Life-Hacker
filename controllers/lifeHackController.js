@@ -1,4 +1,4 @@
-const { LifeHack } = require("../models")
+const { LifeHack, User } = require("../models")
 
 module.exports = {
   createLifeHack: async (req, res) => {
@@ -8,7 +8,19 @@ module.exports = {
         description: req.body.description,
         imageUrl: req.body.imageUrl,
         userId: req.session.userId,
+        author: req.session.username,
       })
+
+      // await User.findByIdAndUpdate(
+      //   req.session.userId,
+      //   {
+      //     $addToSet: {
+      //       lifeHacks: lifeHack._id,
+      //     },
+      //   },
+      //   { new: true }
+      // )
+
       res.json({
         message: "Created lifeHack",
         lifeHack: lifeHack,
@@ -20,12 +32,11 @@ module.exports = {
 
   getLifeHacks: async (req, res) => {
     try {
-      const lifeHacks = await LifeHack.find()
+      const lifeHacks = await LifeHack.find().populate("comments")
 
-      res.json({
-        lifeHacks,
-      })
+      res.json(lifeHacks)
     } catch (error) {
+      console.log(error)
       res.json(error)
     }
   },
@@ -38,7 +49,7 @@ module.exports = {
         },
         {
           $addToSet: {
-            comments: { text: req.body.text, userId: req.session.userId },
+            comments: { text: req.body.text, userName: req.session.username },
           },
         },
         { new: true }

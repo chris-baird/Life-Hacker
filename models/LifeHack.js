@@ -23,6 +23,10 @@ const lifeHackSchema = new Schema({
     default: Date.now,
     get: (timestamp) => timestamp,
   },
+  author: {
+    type: String,
+    required: true,
+  },
   userId: {
     type: Schema.Types.ObjectId,
     ref: "User",

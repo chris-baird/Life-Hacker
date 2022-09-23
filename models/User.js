@@ -21,12 +21,12 @@ const UserSchema = new Schema({
     unique: true,
     trim: true,
   },
-  lifeHacks: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "LifeHack",
-    },
-  ],
+  // lifeHacks: [
+  //   {
+  //     type: Schema.Types.ObjectId,
+  //     ref: "LifeHack",
+  //   },
+  // ],
   favorites: [
     {
       type: Schema.Types.ObjectId,
