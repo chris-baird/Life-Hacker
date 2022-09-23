@@ -1,1 +1,52 @@
 <h1>Login Page</h1>
+
+{{! <form>
+  <div class="mb-3">
+    <label for="login-username" class="form-label">Username</label>
+    <input
+      type="text"
+      class="form-control"
+      id="login-username"
+      aria-describedby="usernameHelp"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="login-password" class="form-label">Password</label>
+    <input type="password" class="form-control" id="login-password" />
+  </div>
+
+</form> }}
+
+<form class="row g-3 needs-validation" novalidate>
+  <div class="col-md-4">
+    <label for="login-username" class="form-label">First name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="login-username"
+      value=""
+      required
+    />
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+  </div>
+  <div class="col-md-4">
+    <label for="login-password" class="form-label">Last name</label>
+    <input
+      type="password"
+      class="form-control"
+      id="login-password"
+      value=""
+      required
+    />
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+  </div>
+  <div class="col-12">
+    <button id="login-button" class="btn btn-primary">Login</button>
+  </div>
+</form>
+
+<script src="./assets/js/login.js"></script>

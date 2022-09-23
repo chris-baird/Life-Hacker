@@ -33,9 +33,7 @@ module.exports = {
   login: async (req, res) => {
     try {
       const user = await User.findOne({
-        where: {
-          userName: req.body.userName,
-        },
+        userName: req.body.userName,
       })
 
       if (!user) {
@@ -43,7 +41,8 @@ module.exports = {
         return
       }
 
-      const validPassword = user.isValidPassword(req.body.password)
+      const validPassword = await user.isValidPassword(req.body.password)
+      console.log(validPassword)
       if (!validPassword) {
         res.status(400).json({ message: "No user account found!" })
         return
@@ -54,7 +53,7 @@ module.exports = {
         req.session.username = user.userName
         req.session.loggedIn = true
 
-        res.json({ user, message: "You are now logged in!" })
+        res.json({ user, message: "You are now logged in!" }).status(200)
       })
     } catch (err) {
       res.status(400).json({ message: "No user account found!" })
