@@ -1,4 +1,7 @@
 const mongoose = require("mongoose")
+const likeSchema = require("./Like")
+const commentSchema = require("./Comment")
+const ratingSchema = require("./Rating")
 
 const Schema = mongoose.Schema
 
@@ -24,24 +27,9 @@ const lifeHackSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
-  likes: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Like",
-    },
-  ],
-  ratings: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Rating",
-    },
-  ],
-  comments: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Comment",
-    },
-  ],
+  likes: [likeSchema],
+  ratings: [ratingSchema],
+  comments: [commentSchema],
 })
 
 lifeHackSchema.virtual("averageRating").get(function () {

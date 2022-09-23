@@ -6,8 +6,7 @@ router
   .route("/")
   .get(isAuthenticated)
   .get(function (req, res) {
-    console.log(req.session)
-    res.send("Hello World")
+    res.send("Hello World " + req.session.username)
   })
 
 router.route("/").post(signUp)
