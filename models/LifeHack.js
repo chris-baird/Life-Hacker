@@ -45,7 +45,9 @@ const lifeHackSchema = new Schema({
 })
 
 lifeHackSchema.virtual("averageRating").get(function () {
-  return this.ratings.reduce((rating) => rating, 0) / this.ratings.length
+  return (
+    this.ratings.reduce((acc, rating) => acc + rating, 0) / this.ratings.length
+  )
 })
 
 lifeHackSchema.virtual("totalLikes").get(function () {
