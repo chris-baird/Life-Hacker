@@ -23,10 +23,12 @@ module.exports = {
   logout: (req, res) => {
     if (req.session.loggedIn) {
       req.session.destroy(() => {
-        res.status(204).end()
+        // res.status(204).end()
+        res.redirect("/")
       })
     } else {
-      res.status(404).end()
+      // res.status(404).end()
+      res.redirect("/")
     }
   },
 
@@ -42,9 +44,8 @@ module.exports = {
       }
 
       const validPassword = await user.isValidPassword(req.body.password)
-      console.log(validPassword)
       if (!validPassword) {
-        res.status(400).json({ message: "No user account found!" })
+        res.status(400).json({ message: "Invalid username or password!" })
         return
       }
 

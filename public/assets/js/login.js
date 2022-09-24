@@ -27,7 +27,7 @@ const passwordEl = document.getElementById("login-password")
 const loginEl = document.getElementById("login-button")
 
 function login() {
-  console.log(userNameEl.value, passwordEl.value)
+  document.getElementById("login-feedback").classList.add("d-none")
 
   fetch("/api/users/login", {
     method: "POST",
@@ -41,9 +41,14 @@ function login() {
       if (res.status === 200) {
         window.location.replace("/dashboard")
       }
+
       return res.json()
     })
-    .then((data) => console.log(data))
+    .then((data) => {
+      console.log(data)
+      document.getElementById("login-feedback").classList.remove("d-none")
+      document.getElementById("login-feedback").innerText = data.message
+    })
     .catch((err) => console.log(err))
 }
 

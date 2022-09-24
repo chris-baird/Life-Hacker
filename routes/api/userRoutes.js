@@ -11,7 +11,7 @@ router
 
 router.route("/").post(signUp)
 
-router.route("/").delete(logout)
+router.route("/logout").get(logout)
 
 router.route("/login").post(login)
 
