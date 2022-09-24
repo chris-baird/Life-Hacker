@@ -1,10 +1,7 @@
 ;(() => {
   "use strict"
 
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
   const form = document.querySelector(".needs-validation")
-
-  // Loop over them and prevent submission
 
   form.addEventListener(
     "submit",
@@ -51,5 +48,3 @@ function login() {
     })
     .catch((err) => console.log(err))
 }
-
-// loginEl.addEventListener("click", login)

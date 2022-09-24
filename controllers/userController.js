@@ -23,11 +23,9 @@ module.exports = {
   logout: (req, res) => {
     if (req.session.loggedIn) {
       req.session.destroy(() => {
-        // res.status(204).end()
         res.redirect("/")
       })
     } else {
-      // res.status(404).end()
       res.redirect("/")
     }
   },
