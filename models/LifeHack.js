@@ -23,14 +23,14 @@ const lifeHackSchema = new Schema({
     default: Date.now,
     get: (timestamp) => timestamp,
   },
-  author: {
-    type: String,
-    required: true,
-  },
-  userId: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
+  // author: {
+  //   type: String,
+  //   required: true,
+  // },
+  // userId: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "User",
+  // },
   likes: [likeSchema],
   ratings: [ratingSchema],
   comments: [commentSchema],
@@ -50,6 +50,6 @@ lifeHackSchema.virtual("totalComments").get(function () {
   return this.comments.length
 })
 
-const LifeHackModel = mongoose.model("lifeHack", lifeHackSchema)
+// const LifeHackModel = mongoose.model("lifeHack", lifeHackSchema)
 
-module.exports = LifeHackModel
+module.exports = lifeHackSchema

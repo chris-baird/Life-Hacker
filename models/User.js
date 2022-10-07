@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
+const lifeHackSchema = require("./LifeHack")
 
 const Schema = mongoose.Schema
 
@@ -21,12 +22,7 @@ const UserSchema = new Schema({
     unique: true,
     trim: true,
   },
-  // lifeHacks: [
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: "LifeHack",
-  //   },
-  // ],
+  lifeHacks: [lifeHackSchema],
   favorites: [
     {
       type: Schema.Types.ObjectId,
