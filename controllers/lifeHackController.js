@@ -1,25 +1,21 @@
 const { LifeHack, User } = require("../models")
-
+// Update all these models to use the User model to create the lifehacks
 module.exports = {
   createLifeHack: async (req, res) => {
     try {
-      const lifeHack = await LifeHack.create({
-        title: req.body.title,
-        description: req.body.description,
-        imageUrl: req.body.imageUrl,
-        userId: req.session.userId,
-        author: req.session.username,
-      })
-
-      // await User.findByIdAndUpdate(
-      //   req.session.userId,
-      //   {
-      //     $addToSet: {
-      //       lifeHacks: lifeHack._id,
-      //     },
-      //   },
-      //   { new: true }
-      // )
+      const lifeHack = await User.updateOne(
+        { _id: req.session.userId },
+        {
+          $push: {
+            lifeHacks: {
+              title: req.body.title,
+              description: req.body.description,
+              imageUrl: req.body.imageUrl,
+              userId: req.session.userId,
+            },
+          },
+        }
+      )
 
       res.json({
         message: "Created lifeHack",
@@ -32,7 +28,12 @@ module.exports = {
 
   getLifeHacks: async (req, res) => {
     try {
-      const lifeHacks = await LifeHack.find().populate("comments")
+      const lifeHacks = await User.find().select([
+        "-password",
+        "-_id",
+        "-email",
+        "-favorites",
+      ])
 
       res.json(lifeHacks)
     } catch (error) {
