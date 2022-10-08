@@ -44,13 +44,17 @@ module.exports = {
 
   createComment: async (req, res) => {
     try {
-      const lifeHack = await LifeHack.findByIdAndUpdate(
+      const lifeHack = await User.updateOne(
         {
-          _id: req.params.lifeHackId,
+          userName: req.body.userName,
+          "lifeHacks._id": req.body.lifeHackId,
         },
         {
-          $addToSet: {
-            comments: { text: req.body.text, userName: req.session.username },
+          $push: {
+            "lifeHacks.$.comments": {
+              text: req.body.text,
+              userName: req.session.username,
+            },
           },
         },
         { new: true }
