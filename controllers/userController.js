@@ -54,21 +54,36 @@ module.exports = {
 
   login: async (req, res) => {
     try {
+      // Type checking req body userName
+      if (typeof req.body.userName !== "string") {
+        throw { message: "userName must be of type string" }
+      }
+
+      // Extracting properties from req.body
+      const userName = req.body.userName
+      const password = req.body.password
+
+      // Finding a user by userName
       const user = await User.findOne({
-        userName: req.body.userName,
+        userName: userName,
       })
 
+      // No user found with userName
       if (!user) {
         res.status(400).json({ message: "No user account found!" })
         return
       }
 
-      const validPassword = await user.isValidPassword(req.body.password)
+      // Checking if password matches
+      const validPassword = await user.isValidPassword(password)
+
+      // Password did not match
       if (!validPassword) {
         res.status(400).json({ message: "Invalid username or password!" })
         return
       }
 
+      // Saving use to session storage
       req.session.save(() => {
         req.session.userId = user._id
         req.session.username = user.userName
@@ -77,7 +92,7 @@ module.exports = {
         res.json({ user, message: "You are now logged in!" }).status(200)
       })
     } catch (err) {
-      res.status(400).json({ message: "No user account found!" })
+      res.status(400).json(err)
     }
   },
 }
