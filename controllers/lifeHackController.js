@@ -3,15 +3,27 @@ const { LifeHack, User } = require("../models")
 module.exports = {
   createLifeHack: async (req, res) => {
     try {
+      // Type error handling
+      if (typeof req.body.title !== "string") {
+        throw { message: "title must be of type string" }
+      }
+      if (typeof req.body.description !== "string") {
+        throw { message: "description must be of type string" }
+      }
+      if (typeof req.body.imageUrl !== "string") {
+        throw { message: "imageUrl must be of type string" }
+      }
+      // Extracting properties from req body
       const newLifeHack = {
         title: req.body.title,
         description: req.body.description,
         imageUrl: req.body.imageUrl,
       }
-      // Creates new lifehack
+      // Creating new lifeHack
       const DBLifeHack = await LifeHack.create(newLifeHack)
-      // Updating users lifehacks array
-      const DBUser = await User.updateOne(
+
+      // Updating users lifehacks array with created lifeHack id
+      await User.updateOne(
         { _id: req.session.userId },
         { $push: { lifeHacks: DBLifeHack._id } }
       )
