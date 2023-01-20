@@ -3,23 +3,19 @@ const { LifeHack, User } = require("../models")
 module.exports = {
   createLifeHack: async (req, res) => {
     try {
-      const lifeHack = await User.updateOne(
-        { _id: req.session.userId },
-        {
-          $push: {
-            lifeHacks: {
-              title: req.body.title,
-              description: req.body.description,
-              imageUrl: req.body.imageUrl,
-              userId: req.session.userId,
-            },
-          },
-        }
-      )
+      const newLifeHack = {
+        title: req.body.title,
+        description: req.body.description,
+        imageUrl: req.body.imageUrl
+      }
+      // Creates new lifehack
+      const DBLifeHack = await LifeHack.create(newLifeHack)
+      // Updating users lifehacks array
+      const DBUser = await User.updateOne({ _id: req.session.userId }, {$push:{lifeHacks: DBLifeHack._id}})
 
       res.json({
         message: "Created lifeHack",
-        lifeHack: lifeHack,
+        lifeHack: DBLifeHack,
       })
     } catch (error) {
       res.json(error)
@@ -28,12 +24,7 @@ module.exports = {
 
   getLifeHacks: async (req, res) => {
     try {
-      const lifeHacks = await User.find().select([
-        "-password",
-        "-_id",
-        "-email",
-        "-favorites",
-      ])
+      const lifeHacks = await LifeHack.find()
 
       res.json(lifeHacks)
     } catch (error) {

@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const likeSchema = new Schema({
   userId: {
     type: Schema.Types.ObjectId,
-    ref: "User",
+    ref: "user",
   },
   createdAt: {
     type: Date,
@@ -14,4 +14,6 @@ const likeSchema = new Schema({
   },
 })
 
-module.exports = likeSchema
+const LikeModel = mongoose.model("like", likeSchema)
+
+module.exports = LikeModel

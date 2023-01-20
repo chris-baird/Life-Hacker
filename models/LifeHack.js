@@ -1,7 +1,5 @@
 const mongoose = require("mongoose")
-const likeSchema = require("./Like")
-const commentSchema = require("./Comment")
-const ratingSchema = require("./Rating")
+
 
 const Schema = mongoose.Schema
 
@@ -31,16 +29,29 @@ const lifeHackSchema = new Schema({
   //   type: Schema.Types.ObjectId,
   //   ref: "User",
   // },
-  likes: [likeSchema],
-  ratings: [ratingSchema],
-  comments: [commentSchema],
+  likes: [{
+    type: mongoose.Schema.ObjectId,
+    ref: "like"
+  }],
+  ratings: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "rating"
+    }
+  ],
+  comments: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "comment"
+    }
+  ],
 })
 
-lifeHackSchema.virtual("averageRating").get(function () {
-  return (
-    this.ratings.reduce((acc, rating) => acc + rating, 0) / this.ratings.length
-  )
-})
+// lifeHackSchema.virtual("averageRating").get(function () {
+//   return (
+//     this.ratings.reduce((acc, rating) => acc + rating, 0) / this.ratings.length
+//   )
+// })
 
 lifeHackSchema.virtual("totalLikes").get(function () {
   return this.likes.length
@@ -50,6 +61,6 @@ lifeHackSchema.virtual("totalComments").get(function () {
   return this.comments.length
 })
 
-// const LifeHackModel = mongoose.model("lifeHack", lifeHackSchema)
+const LifeHackModel = mongoose.model("lifeHack", lifeHackSchema)
 
-module.exports = lifeHackSchema
+module.exports = LifeHackModel

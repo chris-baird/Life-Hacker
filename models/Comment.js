@@ -18,4 +18,6 @@ const commentSchema = new Schema({
   },
 })
 
-module.exports = commentSchema
+const CommentModel = mongoose.model("comment", commentSchema)
+
+module.exports = CommentModel
