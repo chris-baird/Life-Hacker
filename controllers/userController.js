@@ -3,8 +3,30 @@ const { User } = require("../models")
 module.exports = {
   signUp: async (req, res) => {
     try {
-      const user = await User.create(req.body)
+      // TODO Add email regex for email
 
+      // Type error handling
+      if (typeof req.body.email !== "string") {
+        throw { message: "email must be of type string" }
+      }
+      if (typeof req.body.password !== "string") {
+        throw { message: "password must be of type string" }
+      }
+      if (typeof req.body.userName !== "string") {
+        throw { message: "userName must be of type string" }
+      }
+
+      // Extracting properties from req body
+      const newUser = {
+        email: req.body.email,
+        password: req.body.password,
+        userName: req.body.userName,
+      }
+
+      // Creating new user
+      const user = await User.create(newUser)
+
+      // Saving user to session storage
       req.session.save(() => {
         req.session.userId = user._id
         req.session.username = user.userName
