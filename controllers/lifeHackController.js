@@ -52,7 +52,6 @@ module.exports = {
 
   getLifeHackById: async (req, res) => {
     try {
-      console.log(typeof req.params.id)
       // Type error handling
       if (typeof req.params.id !== "string") {
         throw { message: "id must be of type string" }
