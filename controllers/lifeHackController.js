@@ -13,12 +13,14 @@ module.exports = {
       if (typeof req.body.imageUrl !== "string") {
         throw { message: "imageUrl must be of type string" }
       }
+
       // Extracting properties from req body
       const newLifeHack = {
         title: req.body.title,
         description: req.body.description,
         imageUrl: req.body.imageUrl,
       }
+
       // Creating new lifeHack
       const DBLifeHack = await LifeHack.create(newLifeHack)
 
