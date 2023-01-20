@@ -6,12 +6,15 @@ module.exports = {
       const newLifeHack = {
         title: req.body.title,
         description: req.body.description,
-        imageUrl: req.body.imageUrl
+        imageUrl: req.body.imageUrl,
       }
       // Creates new lifehack
       const DBLifeHack = await LifeHack.create(newLifeHack)
       // Updating users lifehacks array
-      const DBUser = await User.updateOne({ _id: req.session.userId }, {$push:{lifeHacks: DBLifeHack._id}})
+      const DBUser = await User.updateOne(
+        { _id: req.session.userId },
+        { $push: { lifeHacks: DBLifeHack._id } }
+      )
 
       res.json({
         message: "Created lifeHack",
@@ -33,6 +36,21 @@ module.exports = {
     }
   },
 
+  getLifeHackById: async (req, res) => {
+    try {
+      const DBLifeHack = await LifeHack.findOne({ _id: req.params.id })
+
+      res.json(DBLifeHack)
+    } catch (error) {
+      res.json(error)
+    }
+  },
+
+  updateLifeHackById: async (req, res) => {},
+
+  deleteLifeHackById: async (req, res) => {},
+
+  // Needs to be updated to match new model
   createComment: async (req, res) => {
     try {
       const lifeHack = await User.updateOne(
