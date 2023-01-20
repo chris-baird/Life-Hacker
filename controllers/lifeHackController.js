@@ -52,10 +52,25 @@ module.exports = {
 
   getLifeHackById: async (req, res) => {
     try {
-      const DBLifeHack = await LifeHack.findOne({ _id: req.params.id })
+      console.log(typeof req.params.id)
+      // Type error handling
+      if (typeof req.params.id !== "string") {
+        throw { message: "id must be of type string" }
+      }
+
+      // Extracting user id from req params
+      const id = req.params.id
+
+      // Finding user by id
+      const DBLifeHack = await LifeHack.findOne({ _id: id })
 
       res.json(DBLifeHack)
     } catch (error) {
+      // Invalid id
+      if (error.name === "CastError") {
+        return res.json({ message: "Invalid id" })
+      }
+
       res.json(error)
     }
   },
