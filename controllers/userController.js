@@ -54,9 +54,12 @@ module.exports = {
 
   login: async (req, res) => {
     try {
-      // Type checking req body userName
+      // Type checking req body properties
       if (typeof req.body.userName !== "string") {
         throw { message: "userName must be of type string" }
+      }
+      if (typeof req.body.password !== "string") {
+        throw { message: "password must be of type string" }
       }
 
       // Extracting properties from req.body
