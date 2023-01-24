@@ -1,7 +1,7 @@
 const { User } = require("../models")
 
 module.exports = {
-  signUp: async (req, res) => {
+  createUser: async (req, res) => {
     try {
       // TODO Add email regex for email
 

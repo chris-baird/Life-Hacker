@@ -1,6 +1,10 @@
 const router = require("express").Router()
 const isAuthenticated = require("../../middleware/isAuthenticated")
-const { signUp, logout, login } = require("../../controllers/userController")
+const {
+  createUser,
+  logout,
+  login,
+} = require("../../controllers/userController")
 
 router
   .route("/")
@@ -9,7 +13,7 @@ router
     res.send("Hello World " + req.session.username)
   })
 
-router.route("/").post(signUp)
+router.route("/").post(createUser)
 
 router.route("/logout").get(logout)
 
