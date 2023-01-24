@@ -85,10 +85,14 @@ module.exports = {
       const id = req.params.id
 
       // Extracting user id from req body
-      const body = {...req.body}
+      const body = { ...req.body }
 
       // Finding user by id
-      const UpdatedDBLifeHack = await LifeHack.findOneAndUpdate({ _id: id },{$set:body},{ runValidators: true, new: true })
+      const UpdatedDBLifeHack = await LifeHack.findOneAndUpdate(
+        { _id: id },
+        { $set: body },
+        { runValidators: true, new: true }
+      )
 
       res.json({
         message: "Updated lifeHack",
@@ -108,9 +112,15 @@ module.exports = {
 
       // Extracting user id from req params
       const id = req.params.id
-      
+
       // Finding user by id
       const RemovedDBLifeHack = await LifeHack.findOneAndRemove({ _id: id })
+
+      // Removes LifeHack from users subdocument
+      await User.updateOne(
+        { _id: req.session.userId },
+        { $pull: { lifeHacks: RemovedDBLifeHack._id } }
+      )
 
       res.json({
         message: "Removed lifeHack",
