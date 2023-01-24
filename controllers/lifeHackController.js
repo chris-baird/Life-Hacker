@@ -19,6 +19,8 @@ module.exports = {
         title: req.body.title,
         description: req.body.description,
         imageUrl: req.body.imageUrl,
+        createdBy: req.session.username,
+        userId: req.session.userId,
       }
 
       // Creating new lifeHack
@@ -114,7 +116,10 @@ module.exports = {
       const id = req.params.id
 
       // Finding user by id
-      const RemovedDBLifeHack = await LifeHack.findOneAndRemove({ _id: id })
+      const RemovedDBLifeHack = await LifeHack.findOneAndRemove({
+        _id: id,
+        userId: req.session.userId,
+      })
 
       // Removes LifeHack from users subdocument
       await User.updateOne(
