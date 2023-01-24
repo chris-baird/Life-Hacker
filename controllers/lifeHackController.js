@@ -128,7 +128,7 @@ module.exports = {
         userId: req.session.userId,
       })
 
-      // Safeguard to prevent users from updating other users LifeHacks
+      // Safeguard to prevent users from deleting other users LifeHacks
       if (!RemovedDBLifeHack) {
         return res.json({
           message: "Invalid User",
