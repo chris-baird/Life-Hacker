@@ -5,11 +5,14 @@ const {
   getLifeHackById,
   createLifeHack,
   createComment,
+  updateLifeHackById
 } = require("../../controllers/lifeHackController")
 
 router.route("/").get(getLifeHacks)
 
 router.route("/:id").get(getLifeHackById)
+
+router.route("/:id").put(isAuthenticated).put(updateLifeHackById)
 
 router.route("/").post(isAuthenticated).post(createLifeHack)
 

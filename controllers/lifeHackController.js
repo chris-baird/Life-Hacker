@@ -74,7 +74,30 @@ module.exports = {
     }
   },
 
-  updateLifeHackById: async (req, res) => {},
+  updateLifeHackById: async (req, res) => {
+    try {
+      // Type error handling
+      if (typeof req.params.id !== "string") {
+        throw { message: "id must be of type string" }
+      }
+
+      // Extracting user id from req params
+      const id = req.params.id
+
+      // Extracting user id from req body
+      const body = {...req.body}
+      
+      // Finding user by id
+      const UpdatedDBLifeHack = await LifeHack.findOneAndUpdate({ _id: id },{$set:body},{ runValidators: true, new: true })
+
+      res.json({
+        message: "Updated lifeHack",
+        lifeHack: UpdatedDBLifeHack,
+      })
+    } catch (error) {
+      res.json(error)
+    }
+  },
 
   deleteLifeHackById: async (req, res) => {},
 
