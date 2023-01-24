@@ -91,10 +91,17 @@ module.exports = {
 
       // Finding user by id
       const UpdatedDBLifeHack = await LifeHack.findOneAndUpdate(
-        { _id: id },
+        { _id: id, userId: req.session.userId },
         { $set: body },
         { runValidators: true, new: true }
       )
+
+      // Safeguard to prevent users from updating other users LifeHacks
+      if (!UpdatedDBLifeHack) {
+        return res.json({
+          message: "Invalid User",
+        })
+      }
 
       res.json({
         message: "Updated lifeHack",
@@ -120,6 +127,13 @@ module.exports = {
         _id: id,
         userId: req.session.userId,
       })
+
+      // Safeguard to prevent users from updating other users LifeHacks
+      if (!RemovedDBLifeHack) {
+        return res.json({
+          message: "Invalid User",
+        })
+      }
 
       // Removes LifeHack from users subdocument
       await User.updateOne(
