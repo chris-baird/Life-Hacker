@@ -86,7 +86,7 @@ module.exports = {
 
       // Extracting user id from req body
       const body = {...req.body}
-      
+
       // Finding user by id
       const UpdatedDBLifeHack = await LifeHack.findOneAndUpdate({ _id: id },{$set:body},{ runValidators: true, new: true })
 
@@ -99,7 +99,27 @@ module.exports = {
     }
   },
 
-  deleteLifeHackById: async (req, res) => {},
+  deleteLifeHackById: async (req, res) => {
+    try {
+      // Type error handling
+      if (typeof req.params.id !== "string") {
+        throw { message: "id must be of type string" }
+      }
+
+      // Extracting user id from req params
+      const id = req.params.id
+      
+      // Finding user by id
+      const RemovedDBLifeHack = await LifeHack.findOneAndRemove({ _id: id })
+
+      res.json({
+        message: "Removed lifeHack",
+        lifeHack: RemovedDBLifeHack,
+      })
+    } catch (error) {
+      res.json(error)
+    }
+  },
 
   // Needs to be updated to match new model
   createComment: async (req, res) => {

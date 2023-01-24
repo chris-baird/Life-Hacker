@@ -5,14 +5,14 @@ const {
   getLifeHackById,
   createLifeHack,
   createComment,
-  updateLifeHackById
+  updateLifeHackById,
+  deleteLifeHackById
 } = require("../../controllers/lifeHackController")
 
 router.route("/").get(getLifeHacks)
 
-router.route("/:id").get(getLifeHackById)
-
-router.route("/:id").put(isAuthenticated).put(updateLifeHackById)
+// TODO Fix the auth rediret
+router.route("/:id").get(getLifeHackById).put(isAuthenticated).put(updateLifeHackById).delete(isAuthenticated).delete(deleteLifeHackById)
 
 router.route("/").post(isAuthenticated).post(createLifeHack)
 
