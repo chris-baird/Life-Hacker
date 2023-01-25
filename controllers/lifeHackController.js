@@ -1,4 +1,5 @@
 const { LifeHack, User } = require("../models")
+
 // Update all these models to use the User model to create the lifehacks
 module.exports = {
   createLifeHack: async (req, res) => {
@@ -149,8 +150,6 @@ module.exports = {
       res.json(error)
     }
   },
-
-  // Needs to be updated to match new model
   createComment: async (req, res) => {
     try {
       // Type error handling
@@ -180,6 +179,36 @@ module.exports = {
 
       res.json({
         message: "Created comment",
+        lifeHack: DBUpdatedLifeHack,
+      })
+    } catch (error) {
+      res.json(error)
+    }
+  },
+  removeComment: async (req, res) => {
+    try {
+      // Type error handling
+      if (typeof req.params.lifeHackId !== "string") {
+        throw { message: "id must be of type string" }
+      }
+      if (typeof req.params.commentId !== "string") {
+        throw { message: "id must be of type string" }
+      }
+
+      // Extracting user id from req params
+      const lifeHackId = req.params.lifeHackId
+      const commentId = req.params.commentId
+
+      // update lifehack with comment
+      const DBUpdatedLifeHack = await LifeHack.findByIdAndUpdate({ _id: lifeHackId }, { $pull: { comments: { _id: commentId } } }, { runValidators: true, new: true })
+
+      // if lifeHack does not exist res with error no lifeHack by that id
+      if (!DBUpdatedLifeHack) {
+        return res.status(404).json({ message: 'No lifeHack with this id!' });
+      }
+
+      res.json({
+        message: "Removed comment",
         lifeHack: DBUpdatedLifeHack,
       })
     } catch (error) {
