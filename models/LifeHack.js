@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const commentSchema = require("./Comment")
 
 const Schema = mongoose.Schema
 
@@ -40,12 +41,7 @@ const lifeHackSchema = new Schema({
       ref: "rating",
     },
   ],
-  comments: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: "comment",
-    },
-  ],
+  comments: [commentSchema],
 })
 
 // lifeHackSchema.virtual("averageRating").get(function () {

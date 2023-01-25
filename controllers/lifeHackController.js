@@ -153,29 +153,34 @@ module.exports = {
   // Needs to be updated to match new model
   createComment: async (req, res) => {
     try {
-      const lifeHack = await User.updateOne(
-        {
-          userName: req.body.userName,
-          "lifeHacks._id": req.body.lifeHackId,
-        },
-        {
-          $push: {
-            "lifeHacks.$.comments": {
-              text: req.body.text,
-              userName: req.session.username,
-            },
-          },
-        },
-        { new: true }
-      )
+      // Type error handling
+      if (typeof req.body.text !== "string") {
+        throw { message: "text must be of type string" }
+      }
+      if (typeof req.params.lifeHackId !== "string") {
+        throw { message: "id must be of type string" }
+      }
 
-      if (!lifeHack) {
-        return res.status(404).json({ message: "No lifeHack with this id!" })
+      // Extracting user id from req params
+      const id = req.params.lifeHackId
+
+      // Extracting properties from req body
+      const newComment = {
+        text: req.body.text,
+        userName: req.session.username,
+      }
+
+      // update lifehack with comment
+      const DBUpdatedLifeHack = await LifeHack.findByIdAndUpdate({ _id: id }, { $push: { comments: newComment } }, { runValidators: true, new: true })
+
+      // if lifeHack does not exist res with error no lifeHack by that id
+      if (!DBUpdatedLifeHack) {
+        return res.status(404).json({ message: 'No lifeHack with this id!' });
       }
 
       res.json({
         message: "Created comment",
-        lifeHack: lifeHack,
+        lifeHack: DBUpdatedLifeHack,
       })
     } catch (error) {
       res.json(error)
