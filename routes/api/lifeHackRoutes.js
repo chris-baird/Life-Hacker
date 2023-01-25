@@ -4,10 +4,11 @@ const {
   getLifeHacks,
   getLifeHackById,
   createLifeHack,
-  createComment,
+  // createComment,
   updateLifeHackById,
-  deleteLifeHackById
+  deleteLifeHackById,
 } = require("../../controllers/lifeHackController")
+const {createComment} = require("../../controllers/commentController")
 
 router.route("/").get(getLifeHacks)
 
@@ -16,6 +17,6 @@ router.route("/:id").get(getLifeHackById).put(isAuthenticated).put(updateLifeHac
 
 router.route("/").post(isAuthenticated).post(createLifeHack)
 
-router.route("/:lifeHackId/comment").post(isAuthenticated).post(createComment)
+router.route("/:lifeHackId/comments").post(isAuthenticated).post(createComment)
 
 module.exports = router
