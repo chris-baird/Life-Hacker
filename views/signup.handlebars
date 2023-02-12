@@ -1,1 +1,67 @@
-<h1>Signup Page</h1>
+<h1>Login Page</h1>
+
+<div id="login-feedback" class="alert alert-danger d-none" role="alert">
+</div>
+<form class="row g-3 needs-validation" novalidate>
+  {{! Email }}
+  <div class="col-md-4">
+    <label for="login-email" class="form-label">Email</label>
+    <input
+      type="text"
+      class="form-control"
+      id="login-email"
+      value=""
+      required
+    />
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+  </div>
+  {{! Username }}
+  <div class="col-md-4">
+    <label for="login-username" class="form-label">Username</label>
+    <input
+      type="text"
+      class="form-control"
+      id="login-username"
+      value=""
+      required
+    />
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+  </div>
+  {{! Password }}
+  <div class="col-md-4">
+    <label for="login-password" class="form-label">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="login-password"
+      value=""
+      required
+    />
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+  </div>
+  {{! Password Validate }}
+  <div class="col-md-4">
+    <label for="login-password-retype" class="form-label">Retype Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="login-password-retype"
+      value=""
+      required
+    />
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+  </div>
+  <div class="col-12">
+    <button id="login-button" class="btn btn-primary">Login</button>
+  </div>
+</form>
+
+<script src="./assets/js/login.js"></script>

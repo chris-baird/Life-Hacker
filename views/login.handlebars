@@ -1,37 +1,46 @@
-<h1>Login Page</h1>
+<section class="container h-75 d-flex flex-column justify-content-center">
 
-<div id="login-feedback" class="alert alert-danger d-none" role="alert">
-</div>
-<form class="row g-3 needs-validation" novalidate>
-  <div class="col-md-4">
-    <label for="login-username" class="form-label">First name</label>
-    <input
-      type="text"
-      class="form-control"
-      id="login-username"
-      value=""
-      required
-    />
-    <div class="valid-feedback">
-      Looks good!
+  <div id="login-feedback" class="alert alert-danger d-none" role="alert">
+  </div>
+  <form
+    class="g-3 needs-validation d-flex justify-content-center align-items-center"
+    novalidate
+  >
+    <div class="card p-5 pt-4">
+      <h1 class="text-center">Life Hacker</h1>
+      {{! Username }}
+      <div class="mt-4">
+        <input
+          placeholder="username"
+          type="text"
+          class="form-control"
+          id="login-username"
+          value=""
+          required
+        />
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+      {{! Password }}
+      <div class="mt-1">
+        <input
+          placeholder="password"
+          type="password"
+          class="form-control"
+          id="login-password"
+          value=""
+          required
+        />
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+      <div class="col-12 mt-3">
+        <button id="login-button" class="btn btn-primary w-100">Login</button>
+      </div>
     </div>
-  </div>
-  <div class="col-md-4">
-    <label for="login-password" class="form-label">Last name</label>
-    <input
-      type="password"
-      class="form-control"
-      id="login-password"
-      value=""
-      required
-    />
-    <div class="valid-feedback">
-      Looks good!
-    </div>
-  </div>
-  <div class="col-12">
-    <button id="login-button" class="btn btn-primary">Login</button>
-  </div>
-</form>
+  </form>
+</section>
 
 <script src="./assets/js/login.js"></script>
