@@ -117,6 +117,8 @@ module.exports = {
 
   deleteLifeHackById: async (req, res) => {
     try {
+      const deleteImages = require("../middleware/deleteImages")
+
       // Type error handling
       if (typeof req.params.id !== "string") {
         throw { message: "id must be of type string" }
@@ -137,6 +139,12 @@ module.exports = {
           message: "Invalid User",
         })
       }
+
+      // Gets image to delete
+      const image = RemovedDBLifeHack.imageUrl.split("/")[3]
+
+      // Deletes all images from bucket storage
+      deleteImages([image])
 
       // Removes LifeHack from users subdocument
       await User.updateOne(
