@@ -4,6 +4,11 @@ const { LifeHack, User } = require("../models")
 module.exports = {
   createLifeHack: async (req, res) => {
     try {
+      // Throws error if image upload failed
+      if (!req.files[0]) {
+        throw { message: "Unexpected error, please try again" }
+      }
+
       // Type error handling
       if (typeof req.body.title !== "string") {
         throw { message: "title must be of type string" }
@@ -11,15 +16,12 @@ module.exports = {
       if (typeof req.body.description !== "string") {
         throw { message: "description must be of type string" }
       }
-      if (typeof req.body.imageUrl !== "string") {
-        throw { message: "imageUrl must be of type string" }
-      }
 
       // Extracting properties from req body
       const newLifeHack = {
         title: req.body.title,
         description: req.body.description,
-        imageUrl: req.body.imageUrl,
+        imageUrl: req.files[0].path,
         createdBy: req.session.username,
         userId: req.session.userId,
       }
@@ -170,11 +172,15 @@ module.exports = {
       }
 
       // update lifehack with comment
-      const DBUpdatedLifeHack = await LifeHack.findByIdAndUpdate({ _id: id }, { $push: { comments: newComment } }, { runValidators: true, new: true })
+      const DBUpdatedLifeHack = await LifeHack.findByIdAndUpdate(
+        { _id: id },
+        { $push: { comments: newComment } },
+        { runValidators: true, new: true }
+      )
 
       // if lifeHack does not exist res with error no lifeHack by that id
       if (!DBUpdatedLifeHack) {
-        return res.status(404).json({ message: 'No lifeHack with this id!' });
+        return res.status(404).json({ message: "No lifeHack with this id!" })
       }
 
       res.json({
@@ -200,11 +206,15 @@ module.exports = {
       const commentId = req.params.commentId
 
       // update lifehack with comment
-      const DBUpdatedLifeHack = await LifeHack.findByIdAndUpdate({ _id: lifeHackId }, { $pull: { comments: { _id: commentId } } }, { runValidators: true, new: true })
+      const DBUpdatedLifeHack = await LifeHack.findByIdAndUpdate(
+        { _id: lifeHackId },
+        { $pull: { comments: { _id: commentId } } },
+        { runValidators: true, new: true }
+      )
 
       // if lifeHack does not exist res with error no lifeHack by that id
       if (!DBUpdatedLifeHack) {
-        return res.status(404).json({ message: 'No lifeHack with this id!' });
+        return res.status(404).json({ message: "No lifeHack with this id!" })
       }
 
       res.json({
