@@ -1,13 +1,13 @@
 <section class="container h-75 d-flex flex-column justify-content-center">
-
-  <div id="login-feedback" class="alert alert-danger d-none" role="alert">
-  </div>
   <form
     class="g-3 needs-validation d-flex justify-content-center align-items-center"
     novalidate
   >
     <div class="card p-5 pt-4">
+      <div id="login-feedback" class="alert alert-danger d-none" role="alert">
+      </div>
       <h1 class="text-center">Life Hacker</h1>
+      <small class="text-center">Where Life Hacks happen!</small>
       {{! Username }}
       <div class="mt-4">
         <input
@@ -39,6 +39,10 @@
       <div class="col-12 mt-3">
         <button id="login-button" class="btn btn-primary w-100">Login</button>
       </div>
+      <br />
+      <hr />
+      <small class="text-center">Don't have an account?
+        <a href="/signup">Sign Up</a></small>
     </div>
   </form>
 </section>

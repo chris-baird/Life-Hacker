@@ -1,67 +1,86 @@
-<h1>Login Page</h1>
+<section class="container h-75 d-flex flex-column justify-content-center">
+  <form
+    oninput='up2.setCustomValidity(up2.value != up.value ? "Passwords do not match." : "")'
+    class="g-3 needs-validation d-flex justify-content-center align-items-center"
+    novalidate
+  >
+    <div class="card p-5 pt-4">
+      <div id="signup-feedback" class="alert alert-danger d-none" role="alert"></div>
+      <h1 class="text-center">Life Hacker</h1>
+      <small class="text-center">Sign Up to browse, comment and create Life
+        Hacks!</small>
+      {{! Email }}
+      <div class="mt-4">
+        <input
+          placeholder="email"
+          type="text"
+          class="form-control"
+          id="signup-email"
+          value=""
+          required
+        />
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+      {{! Username }}
+      <div class="mt-1">
+        <input
+          placeholder="username"
+          type="text"
+          class="form-control"
+          id="signup-username"
+          value=""
+          required
+        />
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+      {{! Password }}
+      <div class="mt-1">
+        <input
+          placeholder="password"
+          type="password"
+          class="form-control"
+          id="signup-password"
+          value=""
+          name="up"
+          required
+        />
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+      {{! Password Confirm }}
+      <div class="mt-1">
+        <input
+          placeholder="retype password"
+          type="password"
+          class="form-control"
+          id="signup-password-confirm"
+          value=""
+          name="up2"
+          required
+        />
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div class="invalid-feedback">
+          Passwords must match!
+        </div>
+      </div>
+      <small class="mt-2 text-muted">By signing up, you agree to our Terms ,
+        Privacy Policy and Cookies Policy .</small>
+      <div class="col-12 mt-3">
+        <button id="signin-button" class="btn btn-primary w-100">Sign Up</button>
+      </div>
+      <br />
+      <hr />
+      <small class="text-center" >Have an account? <a href="/signin">Log In</a></small>
+    </div>
+    </div>
+  </form>
+</section>
 
-<div id="login-feedback" class="alert alert-danger d-none" role="alert">
-</div>
-<form class="row g-3 needs-validation" novalidate>
-  {{! Email }}
-  <div class="col-md-4">
-    <label for="login-email" class="form-label">Email</label>
-    <input
-      type="text"
-      class="form-control"
-      id="login-email"
-      value=""
-      required
-    />
-    <div class="valid-feedback">
-      Looks good!
-    </div>
-  </div>
-  {{! Username }}
-  <div class="col-md-4">
-    <label for="login-username" class="form-label">Username</label>
-    <input
-      type="text"
-      class="form-control"
-      id="login-username"
-      value=""
-      required
-    />
-    <div class="valid-feedback">
-      Looks good!
-    </div>
-  </div>
-  {{! Password }}
-  <div class="col-md-4">
-    <label for="login-password" class="form-label">Password</label>
-    <input
-      type="password"
-      class="form-control"
-      id="login-password"
-      value=""
-      required
-    />
-    <div class="valid-feedback">
-      Looks good!
-    </div>
-  </div>
-  {{! Password Validate }}
-  <div class="col-md-4">
-    <label for="login-password-retype" class="form-label">Retype Password</label>
-    <input
-      type="password"
-      class="form-control"
-      id="login-password-retype"
-      value=""
-      required
-    />
-    <div class="valid-feedback">
-      Looks good!
-    </div>
-  </div>
-  <div class="col-12">
-    <button id="login-button" class="btn btn-primary">Login</button>
-  </div>
-</form>
-
-<script src="./assets/js/login.js"></script>
+<script src="./assets/js/signup.js"></script>
