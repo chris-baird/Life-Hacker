@@ -1,1 +1,32 @@
-<h1>Dashboard Page</h1>
+<h1>Welcome {{User.userName}}</h1>
+
+<section>
+  <button class="btn btn-success">New Life Hack</button>
+  <h2>Your Life Hacks</h2>
+  <section>
+    {{#each User.lifeHacks as |lifeHack|}}
+      <article class="card w-25">
+        <img src="{{lifeHack.imageUrl}}" alt="" class="card-img-top" />
+        <div class="card-body">
+          <h3 class="card-title">{{lifeHack.title}}</h3>
+          <p class="card-text">{{lifeHack.description}}</p>
+          <span class="badge text-bg-info">Likes: 5</span>
+          <span class="badge text-bg-secondary">Rating: 8</span>
+          <span class="badge text-bg-success" style="cursor: pointer;">Comments:
+            3</span>
+        </div>
+        <div>
+          <ul>
+          {{#each lifeHack.comments as |comment|}}
+          <li>
+            <small>{{comment.userName}}</small> - <small>{{comment.createdAt}}</small>
+            <br>
+            <small class="text-muted">{{comment.text}}</small>
+          {{/each}}
+          </li>
+          </ul>
+        </div>
+      </article>
+    {{/each}}
+  </section>
+</section>
