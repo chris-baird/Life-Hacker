@@ -14,6 +14,7 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     trim: true,
+    minLength: [8, "Password length must be at least 8 characters!"],
   },
   userName: {
     type: String,
@@ -24,14 +25,14 @@ const UserSchema = new Schema({
   lifeHacks: [
     {
       type: mongoose.Schema.ObjectId,
-      ref: "lifeHack"
-    }
+      ref: "lifeHack",
+    },
   ],
   favorites: [
     {
       type: mongoose.Schema.ObjectId,
-      ref: "lifeHack"
-    }
+      ref: "lifeHack",
+    },
   ],
 })
 
