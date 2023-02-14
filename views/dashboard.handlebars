@@ -74,8 +74,7 @@
                 <span class="badge text-bg-info">Likes: 5</span>
                 <span class="badge text-bg-secondary">Rating: 8</span>
                 <span class="badge text-bg-success comment" style="cursor: pointer;" data-toggle="tooltop"
-                  data-placement="bottom" title="View Comments">Comments:
-                  {{lifeHack.comments.length}}</span>
+                  data-placement="bottom" title="View Comments">View {{lifeHack.comments.length}} Comments</span>
               </div>
               <span style="cursor: pointer;" data-toggle="tooltop" data-placement="bottom" title="Delete Life Hack">
                 <svg class="dashboard-delete-lifehack" xmlns="http://www.w3.org/2000/svg" data-delete="{{lifeHack._id}}" width="16" height="16" fill="currentColor" class="bi bi-trash"
@@ -90,10 +89,10 @@
             </div>
           </div>
           <div class="d-none">
-            <ul>
+            <ul class="p-0">
               {{#each lifeHack.comments as |comment|}}
-              <li>
-                <small>{{comment.userName}}</small> - <small>{{comment.createdAt}}</small>
+              <li style="list-style: none;" class="bg-info m-2 p-2">
+                <small>{{comment.userName}}</small> - <small>{{format_date comment.createdAt}}</small>
                 <br>
                 <small class="text-muted">{{comment.text}}</small>
                 {{/each}}
