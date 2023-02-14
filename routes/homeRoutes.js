@@ -1,13 +1,20 @@
 const router = require("express").Router()
 const isAuthenticated = require("../middleware/isAuthenticated")
-const { User } = require("../models")
+const { User, LifeHack } = require("../models")
 
 router.get("/", (req, res) => {
   res.render("landing", { user: req.session.loggedIn })
 })
 
-router.get("/browse", (req, res) => {
-  res.render("browse", { user: req.session.loggedIn })
+router.get("/browse", async (req, res) => {
+  const data = await LifeHack.find()
+  const lifeHacks = data.map((lh) => {
+    const lifehackJSON = lh.toJSON()
+    lifehackJSON.owned =
+      lh.userId.toString() === req.session.userId ? true : false
+    return lifehackJSON
+  })
+  res.render("browse", { user: req.session.loggedIn, lifeHacks })
 })
 
 router.get("/signup", (req, res) => {
@@ -23,12 +30,21 @@ router.get("/lifehack/:id", (req, res) => {
 })
 
 router.get("/dashboard", isAuthenticated, async (req, res) => {
-  const userData = await User.findOne({ _id: req.session.userId }).populate(
+  const data = await User.findOne({ _id: req.session.userId }).populate(
     "lifeHacks"
   )
+
+  const userData = data.toJSON()
+  const lifeHacks = userData.lifeHacks.map((lh) => {
+    lh.owned = true
+    return lh
+  })
+
+  userData.lifeHacks = lifeHacks
+
   res.render("dashboard", {
     user: req.session.loggedIn,
-    User: userData.toJSON(),
+    User: userData,
   })
 })
 

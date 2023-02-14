@@ -1,1 +1,10 @@
-<h1>Browse Page</h1>
+<section class="container">
+  <h1 class="text-center mt-5 mb-5">Life Hacks</h1>
+  <section class="d-flex flex-wrap align-items-start">
+    {{#each lifeHacks as |lifeHack|}}
+    {{> lifeHackCard}}
+    {{/each}}
+  </section>
+</section>
+
+<script src="./assets/js/browse.js"></script>
