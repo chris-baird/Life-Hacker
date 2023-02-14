@@ -1,8 +1,5 @@
 @media (max-width: 576px) {
   /* … */
-  body {
-    background-color: red;  
-  }
   .lifehack-card {
     width:100%
   }
@@ -10,9 +7,6 @@
 
 @media (min-width: 576px) {
   /* … */
-  body {
-    background-color: orange;
-  }
   .lifehack-card {
     width:100%
   }
@@ -20,9 +14,6 @@
 
 @media (min-width: 778px) {
   /* … */
-  body {
-    background-color: yellow;
-  }
   .lifehack-card {
     width:40%
   }
@@ -30,9 +21,6 @@
 
 @media (min-width: 992px) {
   /* … */
-  body {
-    background-color: green;
-  }
   .lifehack-card {
     width:30%
   }
@@ -40,9 +28,6 @@
 
 @media (min-width: 1200px) {
   /* … */
-  body {
-    background-color: blue;
-  }
   .lifehack-card {
     width:30%
   }

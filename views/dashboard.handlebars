@@ -1,108 +1,110 @@
-<section class="container">
-<h1 class="m-2">Welcome {{User.userName}}</h1>
-<button id="dashboard-create" class="m-2 btn btn-success">New Life Hack <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-down" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6z"/>
-</svg></button>
+<section class="container mt-5 mt-5">
+  <h1 class="m-2 text-center">Welcome {{User.userName}}</h1>
 
-<section>
-  
-      <form
-      enctype="multipart/form-data" method="POST"
-      id="dashboard-form"
-    class="m-2 g-3 needs-validation d-flex justify-content-start align-items-center d-none"
-    novalidate
-  >
-    <div class="card p-5 pt-4">
-      <div id="dashboard-feedback" class="alert alert-danger d-none" role="alert">
-      </div>
-      <h3>Create a new life hack</h3>
-      {{! Title }}
-      <div class="mt-4">
-        <input
-          placeholder="Title"
-          type="text"
-          class="form-control"
-          id="dashboard-title"
-          value=""
-          required
-        />
-        <div class="valid-feedback">
-          Looks good!
+  <section class="m-2 d-flex flex-row justify-content-between">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a id="dashboard-lifehacks" class="nav-link active" href="#">Life Hacks</a>
+      </li>
+      <li class="nav-item">
+        <a id="dashboard-favorites" class="nav-link" href="#">Favorites</a>
+      </li>
+      <li class="nav-item"></li>
+      <a href="#" id="dashboard-create" class="nav-link">New Life Hack <svg xmlns="http://www.w3.org/2000/svg"
+            width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-down" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6z" />
+          </svg></a>
+          </li>
+    </ul>
+  </section>
+
+  <section>
+
+    <form enctype="multipart/form-data" method="POST" id="dashboard-form"
+      class="m-2 g-3 needs-validation d-flex justify-content-start align-items-center d-none" novalidate>
+      <div class="card p-5 pt-4">
+        <div id="dashboard-feedback" class="alert alert-danger d-none" role="alert">
         </div>
-      </div>
-       {{! Description }}
-      <div class="mt-4">
-        <textarea
-          placeholder="Description"
-          
-          class="form-control"
-          id="dashboard-description"
-          value=""
-          required
-        /></textarea>
-        <div class="valid-feedback">
-          Looks good!
-        </div>
-      </div>
-       {{! Image }}
-      <div class="mt-4">
-        <input
-          name="file"
-          type="file"
-          class="form-control"
-          id="dashboard-file"
-          value=""
-          required
-          accept="image/*"
-        />
-        <div class="valid-feedback">
-          Looks good!
-        </div>
-      </div>
-      <div class="col-12 mt-3">
-        <button id="dashboard-submit" class="btn btn-primary w-100">Create</button>
-      </div>
-    </div>
-  </form>
-    
-  <section class="d-flex flex-wrap align-items-start justify-content-between">
-    {{#each User.lifeHacks as |lifeHack|}}
-      <article class="card lifehack-card m-2">
-        <img src="{{lifeHack.imageUrl}}" alt="" class="card-img-top" />
-        <div class="card-body">
-          <h3 class="card-title">{{lifeHack.title}}</h3>
-          <p class="card-text">{{lifeHack.description}}</p>
-          <div class="d-flex justify-content-between">
-            <div>
-              <span class="badge text-bg-info">Likes: 5</span>
-              <span class="badge text-bg-secondary">Rating: 8</span>
-              <span class="badge text-bg-success comment" style="cursor: pointer;" data-toggle="tooltop" data-placement="bottom" title="View Comments">Comments:
-              3</span>
-            </div>
-            <span style="cursor: pointer;" data-toggle="tooltop" data-placement="bottom" title="Delete Life Hack">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-              <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-            </svg>
-            </span>
-            
+        <h3>Create a new life hack</h3>
+        {{! Title }}
+        <div class="mt-4">
+          <input placeholder="Title" type="text" class="form-control" id="dashboard-title" value="" required />
+          <div class="valid-feedback">
+            Looks good!
           </div>
         </div>
-        <div class="d-none">
-          <ul>
-          {{#each lifeHack.comments as |comment|}}
-          <li>
-            <small>{{comment.userName}}</small> - <small>{{comment.createdAt}}</small>
-            <br>
-            <small class="text-muted">{{comment.text}}</small>
-          {{/each}}
-          </li>
-          </ul>
+        {{! Description }}
+        <div class="mt-4">
+          <textarea placeholder="Description" class="form-control" id="dashboard-description" value=""
+            required /></textarea>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
         </div>
-      </article>
-    {{/each}}
+        {{! Image }}
+        <div class="mt-4">
+          <input name="file" type="file" class="form-control" id="dashboard-file" value="" required accept="image/*" />
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+        <div class="col-12 mt-3">
+          <button id="dashboard-submit" class="btn btn-success w-100">Create</button>
+        </div>
+      </div>
+    </form>
+    <section>
+      <section class="d-flex justify-content-between">
+
+
+        <h2 class="m-2">Your Life Hacks</h2>
+        
+      </section>
+      <section class="d-flex flex-wrap align-items-start">
+
+        {{#each User.lifeHacks as |lifeHack|}}
+        <article class="card lifehack-card m-2">
+          <img src="{{lifeHack.imageUrl}}" alt="" class="card-img-top" />
+          <div class="card-body">
+            <h3 class="card-title">{{lifeHack.title}}</h3>
+            <p class="card-text">{{lifeHack.description}}</p>
+            <div class="d-flex justify-content-between">
+              <div>
+                <span class="badge text-bg-info">Likes: 5</span>
+                <span class="badge text-bg-secondary">Rating: 8</span>
+                <span class="badge text-bg-success comment" style="cursor: pointer;" data-toggle="tooltop"
+                  data-placement="bottom" title="View Comments">Comments:
+                  3</span>
+              </div>
+              <span style="cursor: pointer;" data-toggle="tooltop" data-placement="bottom" title="Delete Life Hack">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
+                  viewBox="0 0 16 16">
+                  <path
+                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                  <path fill-rule="evenodd"
+                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                </svg>
+              </span>
+
+            </div>
+          </div>
+          <div class="d-none">
+            <ul>
+              {{#each lifeHack.comments as |comment|}}
+              <li>
+                <small>{{comment.userName}}</small> - <small>{{comment.createdAt}}</small>
+                <br>
+                <small class="text-muted">{{comment.text}}</small>
+                {{/each}}
+              </li>
+            </ul>
+          </div>
+        </article>
+        {{/each}}
+      </section>
+    </section>
   </section>
-</section>
 </section>
 
 
