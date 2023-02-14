@@ -56,9 +56,6 @@
     fetch("/api/lifeHacks/", {
       method: "POST",
       body: formData,
-      // headers: {
-      //   "Content-Type": "multipart/form-data",
-      // },
     })
       .then((res) => {
         console.log(res)
@@ -92,7 +89,7 @@
         const description = document.getElementById(
           "dashboard-description"
         ).value
-        const file = document.getElementById("dashboard-file").value
+        const file = document.getElementById("dashboard-file").files[0]
         createLifeHack(title, description, file)
       }
       form.classList.add("was-validated")

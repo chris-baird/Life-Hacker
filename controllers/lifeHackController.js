@@ -4,8 +4,6 @@ const { LifeHack, User } = require("../models")
 module.exports = {
   createLifeHack: async (req, res) => {
     try {
-      // console.log(req.body)
-      console.log(req.files)
       // Throws error if image upload failed
       if (!req.files[0]) {
         throw { message: "Unexpected error, please try again" }
@@ -42,7 +40,6 @@ module.exports = {
         lifeHack: DBLifeHack,
       })
     } catch (error) {
-      console.log(error)
       res.status(400).json(error)
     }
   },
@@ -53,7 +50,6 @@ module.exports = {
 
       res.json(lifeHacks)
     } catch (error) {
-      console.log(error)
       res.json(error)
     }
   },

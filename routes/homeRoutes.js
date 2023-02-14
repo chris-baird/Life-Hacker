@@ -26,7 +26,6 @@ router.get("/dashboard", isAuthenticated, async (req, res) => {
   const userData = await User.findOne({ _id: req.session.userId }).populate(
     "lifeHacks"
   )
-  console.log(userData.toJSON().lifeHacks[0].comments)
   res.render("dashboard", {
     user: req.session.loggedIn,
     User: userData.toJSON(),
