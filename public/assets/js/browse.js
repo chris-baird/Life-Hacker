@@ -1,22 +1,41 @@
 ;(() => {
   "use strict"
 
-  // const commentEL = document.querySelectorAll(".comment")
+  // Displays comment, like and rating controls if user is logged in
+  function showControls() {
+    const user = document.querySelector(".browse-page").dataset.user
+    if (user === "true") {
+      document.querySelectorAll(".browse-controls").forEach((e) => {
+        e.classList.remove("browse-controls")
+      })
+    }
+  }
 
-  // commentEL.forEach((e) => {
-  //   e.addEventListener("click", (el) => {
-  //     const commentEl =
-  //       el.target.parentNode.parentNode.parentNode.parentNode.parentNode
-  //         .children[2]
-  //     const commentClasses = [...commentEl.classList]
+  showControls()
 
-  //     if (commentClasses.includes("d-none")) {
-  //       commentEl.classList.remove("d-none")
-  //     } else {
-  //       commentEl.classList.add("d-none")
-  //     }
-  //   })
-  // })
+  function createComment(e) {
+    const id = e.currentTarget.dataset.id
+    const text = e.currentTarget.previousElementSibling.children[0].value
+    if (text) {
+      fetch("/api/lifeHacks/" + id + "/comments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          text,
+        }),
+      }).then((res) => {
+        if (res.status === 200) {
+          window.location.replace("/browse")
+        }
+      })
+    }
+  }
+
+  const commentEls = document.querySelectorAll(".comment-submit")
+
+  commentEls.forEach((e) => {
+    e.addEventListener("click", createComment)
+  })
 
   function deleteLifehack(e) {
     const id = e.currentTarget.dataset.delete
