@@ -14,7 +14,8 @@
   commentEL.forEach((e) => {
     e.addEventListener("click", (el) => {
       const commentEl =
-        el.target.parentNode.parentNode.parentNode.parentNode.children[2]
+        el.target.parentNode.parentNode.parentNode.parentNode.parentNode
+          .children[2]
       const commentClasses = [...commentEl.classList]
 
       if (commentClasses.includes("d-none")) {

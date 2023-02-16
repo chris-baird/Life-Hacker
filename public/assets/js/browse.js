@@ -1,21 +1,22 @@
 ;(() => {
   "use strict"
 
-  const commentEL = document.querySelectorAll(".comment")
+  // const commentEL = document.querySelectorAll(".comment")
 
-  commentEL.forEach((e) => {
-    e.addEventListener("click", (el) => {
-      const commentEl =
-        el.target.parentNode.parentNode.parentNode.parentNode.children[2]
-      const commentClasses = [...commentEl.classList]
+  // commentEL.forEach((e) => {
+  //   e.addEventListener("click", (el) => {
+  //     const commentEl =
+  //       el.target.parentNode.parentNode.parentNode.parentNode.parentNode
+  //         .children[2]
+  //     const commentClasses = [...commentEl.classList]
 
-      if (commentClasses.includes("d-none")) {
-        commentEl.classList.remove("d-none")
-      } else {
-        commentEl.classList.add("d-none")
-      }
-    })
-  })
+  //     if (commentClasses.includes("d-none")) {
+  //       commentEl.classList.remove("d-none")
+  //     } else {
+  //       commentEl.classList.add("d-none")
+  //     }
+  //   })
+  // })
 
   function deleteLifehack(e) {
     const id = e.currentTarget.dataset.delete
