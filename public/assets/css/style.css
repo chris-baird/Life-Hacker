@@ -1,3 +1,11 @@
+.bold-it {
+  font-weight: bold;
+}
+
+.emphasize-it {
+  font-style: italic;
+}
+
 @media (max-width: 576px) {
   /* … */
   .lifehack-card {

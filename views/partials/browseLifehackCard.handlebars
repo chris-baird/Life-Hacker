@@ -72,7 +72,7 @@
     <div class="d-flex justify-content-between">
       <div>
         <span
-          class="badge text-bg-info d-inline-flex align-items-center"
+          class="badge text-bg-secondary d-inline-flex align-items-center"
           style="cursor: pointer;"
           data-toggle="tooltop"
           data-placement="bottom"
@@ -148,10 +148,12 @@
         </div>
         <button class="btn btn-success m-2">Comment</button>
         {{#each comments as |comment|}}
-          <li style="list-style: none;" class="m-2 p-2">
-            <small>{{comment.userName}}</small>
+          <li style="list-style: none;" class="m-2 p-2 bg-light">
+            <small class="bold-it">{{comment.userName}}</small>
             -
-            <small>{{format_date comment.createdAt}}</small>
+            <small class="emphasize-it">{{format_date
+                comment.createdAt
+              }}</small>
             <br />
             <small class="text-muted">{{comment.text}}</small>
           </li>
