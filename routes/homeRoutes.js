@@ -2,8 +2,17 @@ const router = require("express").Router()
 const isAuthenticated = require("../middleware/isAuthenticated")
 const { User, LifeHack } = require("../models")
 
-router.get("/", (req, res) => {
-  res.render("landing", { user: req.session.loggedIn })
+router.get("/", async (req, res) => {
+  try {
+    const data = await LifeHack.find().limit(3)
+    const lifeHacks = data.map((lh) => lh.toJSON())
+    res.render("landing", {
+      user: req.session.loggedIn,
+      lifeHacks,
+    })
+  } catch (error) {
+    console.log(error)
+  }
 })
 
 router.get("/browse", async (req, res) => {
