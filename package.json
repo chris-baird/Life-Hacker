@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --detectOpenHandles",
     "start": "node server.js",
     "dev": "npx nodemon server.js"
   },
@@ -30,5 +30,9 @@
     "mongoose-express-session": "^0.0.5",
     "multer": "^1.4.5-lts.1",
     "multer-google-storage": "^1.3.0"
+  },
+  "devDependencies": {
+    "jest": "^29.4.3",
+    "supertest": "^6.3.3"
   }
 }
