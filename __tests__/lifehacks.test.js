@@ -12,9 +12,14 @@ describe("Lifehack API Endpoint Tests", () => {
     it("should return status of 200", (done) => {
       request(app)
         .get("/api/lifeHacks")
-        .expect(200)
-        .end((err) => {
-          return done()
+        .expect((res) => {
+          expect(res.status).toEqual(200)
+        })
+        .end((err, res) => {
+          if (err) {
+            return done(err)
+          }
+          done()
         })
     })
   })
@@ -23,9 +28,13 @@ describe("Lifehack API Endpoint Tests", () => {
     it("should return an array", (done) => {
       request(app)
         .get("/api/lifeHacks")
-        .expect(200)
-        .end((err, res) => {
+        .expect((res) => {
           expect(Array.isArray(res.body)).toBe(true)
+        })
+        .end((err, res) => {
+          if (err) {
+            return done(err)
+          }
           return done()
         })
     })

@@ -2,12 +2,12 @@ const request = require("supertest")
 const app = require("../app")
 const mongoose = require("mongoose")
 
-describe("API Tests", () => {
+describe("User API Endpoint Tests", () => {
   // Cleans up database connection after all tests have been done
   afterAll(() => {
     mongoose.connection.close()
   })
-
+  // Login with good creds
   describe("POST /api/users/login", () => {
     it("should return 200 With a correct login", (done) => {
       request(app)
@@ -26,7 +26,7 @@ describe("API Tests", () => {
         })
     })
   })
-
+  // Login with bad creds
   describe("POST /api/users/login", () => {
     it("should return 400 With a incorrect login", (done) => {
       request(app)
