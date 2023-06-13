@@ -1,6 +1,6 @@
-const router = require("express").Router()
-const isAuthenticated = require("../../middleware/isAuthenticated")
-const uploadHandler = require("../../middleware/multer-google-storage")
+const router = require("express").Router();
+const isAuthenticated = require("../../middleware/isAuthenticated");
+const uploadHandler = require("../../middleware/multer-google-storage");
 const {
   getLifeHacks,
   getLifeHackById,
@@ -9,9 +9,10 @@ const {
   removeComment,
   updateLifeHackById,
   deleteLifeHackById,
-} = require("../../controllers/lifeHackController")
+  addLike,
+} = require("../../controllers/lifeHackController");
 
-router.route("/").get(getLifeHacks)
+router.route("/").get(getLifeHacks);
 
 // TODO Fix the auth rediret
 router
@@ -20,19 +21,21 @@ router
   .put(isAuthenticated)
   .put(updateLifeHackById)
   .delete(isAuthenticated)
-  .delete(deleteLifeHackById)
+  .delete(deleteLifeHackById);
 
 router
   .route("/")
   .post(isAuthenticated)
   .post(uploadHandler.any())
-  .post(createLifeHack)
+  .post(createLifeHack);
 
-router.route("/:lifeHackId/comments").post(isAuthenticated).post(createComment)
+router.route("/:lifeHackId/comments").post(isAuthenticated).post(createComment);
 
 router
   .route("/:lifeHackId/comments/:commentId")
   .delete(isAuthenticated)
-  .delete(removeComment)
+  .delete(removeComment);
 
-module.exports = router
+router.route("/:lifeHackId/likes").post(addLike);
+
+module.exports = router;
